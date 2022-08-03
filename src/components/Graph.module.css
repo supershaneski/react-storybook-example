@@ -1,0 +1,161 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    position: relative;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+}
+
+.axisY {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 75px;
+    height: calc(100% - 50px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.axisX {
+    position: absolute;
+    left: 74px;
+    bottom: 0;
+    width: calc(100% - 74px);
+    height: 50px;
+    box-sizing: border-box;
+}
+.gridX {
+    position: relative;
+    height: 5px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+.tickX {
+    height: 100%;
+    box-sizing: border-box;
+}
+.gridXLabel {
+    position: relative;
+    height: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+.gridXLabelItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.gridXLabelItem span {
+    font-size: 0.7rem;
+}
+.overflow {
+    overflow: hidden;
+    white-space: hidden;
+    text-overflow: ellipsis;
+}
+.normal {
+    overflow: visible;
+}
+
+.axisXLabel {
+    position: relative;
+    height: 25px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.graphArea {
+    position: absolute;
+    left: 75px;
+    top: 0;
+    width: calc(100% - 75px);
+    height: calc(100% - 50px);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+.bar {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+}
+.innerBar {
+    position: relative;
+    height: 100%;
+}
+
+.emptyData {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.emptyData span {
+    color: #555;
+}
+.graphLabel {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+}
+.graphLabel span {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.axisYLabel {
+    position: relative;
+    width: 25px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.axisYLabel span {
+    font-size: 1em;
+    writing-mode: vertical-lr;
+    transform: rotateZ(180deg);
+}
+.gridYLabel {
+    position: relative;
+    width: 45px;
+    height: 100%;
+    box-sizing: border-box;
+}
+.gridY {
+    position: relative;
+    width: 5px;
+    height: 100%;
+    box-sizing: border-box;
+}
+.tickY {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+.gridYLabelItem {
+    position: absolute;
+    right: 2px;
+    display: flex;
+}
+.gridYLabelItem span {
+    font-size: 0.6em;
+}
