@@ -10,7 +10,7 @@ export default {
   },
 };
 
-const Template = (args) => <div style={{width: '650px', height: '300px'}}><Graph {...args} /></div>;
+const Template = (args) => <div style={{width: '100%', height: '300px'}}><Graph {...args} /></div>;
 
 export const Default = Template.bind({});
 Default.args = {
