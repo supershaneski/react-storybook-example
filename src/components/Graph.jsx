@@ -3,8 +3,36 @@ import PropTypes from 'prop-types';
 import classes from './Graph.module.css'
 import Bar from './Bar'
 
-export default function Graph({ xAxis, yAxis, backgroundColor, emptyLabel, emptyLabelColor, title, titleAlign, titleColor, data, axisLabelColor, tickLabelColor, tickLabelX, tickLabelY, tickLabelXOverflow, labelX, labelY, dataMargin, color, axisColor, onClick }) {
+function normalizeData(items) {
+    
+    // We get the max value of the array
+    // then add 10% and use it
+    // to normalize the values so that
+    // the graph will not reach the top.
+    // This is just to make the graph look better.
 
+    const max = Math.max(...items.map(({y}) => y))
+  
+    const bias = Math.round(0.1 * max)
+  
+    const normal_items = items.map(item => {
+      return {
+        ...item,
+        y: Math.round(100 * (item.y / (max + bias)))
+      }
+    })
+  
+    return {
+      max: max,
+      items: normal_items,
+    }
+  
+}
+  
+export default function Graph({ xAxis, yAxis, backgroundColor, emptyLabel, emptyLabelColor, title, titleAlign, titleColor, data, axisLabelColor, tickLabelColor, tickLabelX, tickLabelY, tickLabelXOverflow, labelX, labelY, dataMargin, color, axisColor, onClick }) {
+    
+    const normalized_data = normalizeData(data)
+    
     const items = Array((tickLabelX.length + 1)).fill(0)
 
     return (
@@ -21,11 +49,14 @@ export default function Graph({ xAxis, yAxis, backgroundColor, emptyLabel, empty
                 <div className={classes.gridYLabel}>
                 {
                     tickLabelY.map((item, index) => {
+
+                        let item_y = Math.round(100 * (item.y/110))
+
                         return (
                             <div 
                             key={index} 
                             className={classes.gridYLabelItem}
-                            style={{bottom: `calc(${item.y}% - 6px)`}}
+                            style={{bottom: `calc(${item_y}% - 6px)`}}
                             >
                                 <span style={{
                                     color: tickLabelColor,
@@ -38,12 +69,15 @@ export default function Graph({ xAxis, yAxis, backgroundColor, emptyLabel, empty
                 <div className={classes.gridY}>
                 {
                     tickLabelY.map((item, index) => {
+                        
+                        let item_y = Math.round(100 * (item.y/110))
+                        
                         return (
                             <div 
                             key={index}
                             className={classes.tickY}
                             style={{
-                                height: `${item.y}%`,
+                                height: `${item_y}%`,
                                 borderTop: `1px solid ${axisColor}`,
                             }}
                             ></div>
@@ -54,7 +88,7 @@ export default function Graph({ xAxis, yAxis, backgroundColor, emptyLabel, empty
             </div>
             <div className={classes.graphArea}>
                 {
-                    data.map((item, index) => {
+                    normalized_data.items.map((item, index) => {
                         return (
                             <div 
                             key={index} 
@@ -66,7 +100,11 @@ export default function Graph({ xAxis, yAxis, backgroundColor, emptyLabel, empty
                                 <div className={classes.innerBar} style={{
                                     width: `calc(100% - ${dataMargin}px)`,
                                 }}>
-                                    <Bar onClick={(v) => onClick(index, v)} color={color} value={item.y} />
+                                    <Bar 
+                                    onClick={(v) => onClick(index, v)} 
+                                    color={color} 
+                                    value={item.y} 
+                                    />
                                 </div>
                             </div>
                         )
